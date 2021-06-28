@@ -1,3 +1,4 @@
 {
-    "authToken": ""
+    "authToken": "",
+    "chromeDriverPath": ""
 }
