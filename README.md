@@ -50,7 +50,7 @@ Shortcut for main browsers:
 
 ## Features
 
-* Collect points (every 5 minutes) (+5pts)
+* Collect points (every 5 minutes) (+10pts)
 * Recover the drops (+50pts)
 * Watch serial streams (+450pts)
 
