@@ -1,8 +1,10 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 import json
 import time
 import requests
+import datetime
 
 class TwitchPointFarmer():
     def __init__(self, authTokenCookie, chromeDriverPath, twitchClientID, streamers):
@@ -23,7 +25,13 @@ class TwitchPointFarmer():
 
     def main(self):
         # Open chromedriver
-        self.driver = webdriver.Chrome(self.chromeDriverPath)
+        chromeOptions = Options()
+        chromeOptions.add_argument("--headless")
+
+        self.driver = webdriver.Chrome(
+            executable_path = self.chromeDriverPath,
+            chrome_options = chromeOptions
+        )
 
         # Connection
         self.driver.get("https://www.twitch.tv")
@@ -50,6 +58,7 @@ class TwitchPointFarmer():
                 self.currentStreamer = i
                 # Change the url
                 self.driver.get(f"https://www.twitch.tv/{self.currentStreamer}")
+                print(f"- [{datetime.datetime.now().strftime('%X')}] New Streamer : {self.currentStreamer}")
                 time.sleep(8)
                 try:
                     # If the live is under 18 yo
@@ -99,5 +108,4 @@ if __name__ == '__main__':
         streamers = config["streamers"]
 
     twitchPointFarmer = TwitchPointFarmer(authTokenCookie, chromeDriverPath, twitchClientID, streamers)
-
     twitchPointFarmer.main()
