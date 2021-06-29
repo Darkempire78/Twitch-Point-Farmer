@@ -45,7 +45,7 @@ Shortcut for main browsers:
 * Go to `https://www.twitch.tv/`
 * Open the Dev Tools (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd> or <kbd>F12</kbd>)
 * Go to the Storage tab
-* CLick on `Cookies` then `https://www.twitch.tv`
+* Click on `Cookies` then `https://www.twitch.tv`
 * Copy the content of the cookie named `auth-token`
 
 ## Features
