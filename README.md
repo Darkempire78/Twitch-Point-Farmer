@@ -9,7 +9,7 @@ Automatically collects channel points for your favorite streamers.
 * Install all dependencies : ``pip install -r requirements.txt``.
 * Download [Chromedriver](https://chromedriver.chromium.org/downloads).
 * Get your Twitch authentication cookie (auth-token).
-* Create an application on the [Twitch dashboard](https://dev.twitch.tv/console/apps/create)
+* Create an application on the [Twitch dashboard](https://dev.twitch.tv/console/apps/create).
 * Edit `config.example.json`:
 
 ```Javascript
@@ -35,7 +35,9 @@ Finally, launch the script.
 * Click on the coupon and retrieve the contents of the cookie named `auth-token`
 
 Shortcut for main browsers:
+
 **Chrome:** `chrome://settings/cookies/detail?site=twitch.tv`
+
 **Brave:** `brave://settings/cookies/detail?site=twitch.tv`
 
 ### Firefox
