@@ -1,4 +1,6 @@
 {
-    "authToken": "",
-    "chromeDriverPath": ""
+    "chromeDriverPath": "",
+    "authTokenCookie": "",
+    "twitchClientID": "",
+    "streamers": []
 }
