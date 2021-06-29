@@ -50,6 +50,12 @@ class TwitchPointFarmer():
                 self.currentStreamer = i
                 # Change the url
                 self.driver.get(f"https://www.twitch.tv/{self.currentStreamer}")
+                time.sleep(8)
+                try:
+                    # If the live is under 18 yo
+                    self.driver.find_element_by_css_selector("button[data-a-target='player-overlay-mature-accept']").click()
+                except:
+                    pass
                 return
         self.currentStreamer = None
         return
