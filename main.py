@@ -75,8 +75,9 @@ class TwitchPointFarmer():
 
         req = reqSession.get(url, headers=self.twitchAPIHeaders)
         jsondata = req.json()
-        if len(jsondata["users"]) > 0:
-            return jsondata["users"][0]["_id"]
+        if jsondata:
+            if len(jsondata["users"]) > 0:
+                return jsondata["users"][0]["_id"]
         return None
 
     def checkIfUserIsStreaming(self, user): #returns true if online, false if not
