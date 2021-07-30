@@ -47,7 +47,7 @@ class TwitchPointFarmer():
 
             # Click on the reward
             try:
-                self.driver.find_element_by_css_selector("button[class='ScCoreButton-sc-1qn4ixc-0 ScCoreButtonSuccess-sc-1qn4ixc-5 VGQNd']").click()
+                self.driver.find_element_by_css_selector("button[class='sc-fzozJi sc-fznKkj jwRWhW']").click()
             except:
                 pass
             time.sleep(8)
