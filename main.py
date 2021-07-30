@@ -6,7 +6,7 @@ import time
 import datetime
 
 class TwitchPointFarmer():
-    def __init__(self, authTokenCookie, chromeDriverPath, streamers):
+    def __init__(self, authTokenCookie, chromeDriverPath, streamers, hideTheBot):
         self.chromeDriverPath = chromeDriverPath
         self.authTokenCookie = authTokenCookie
         self.driver = None
@@ -16,7 +16,8 @@ class TwitchPointFarmer():
     def main(self):
         # Open chromedriver
         chromeOptions = Options()
-        chromeOptions.add_argument("--headless")
+        if hideTheBot:
+            chromeOptions.add_argument("--headless")
 
         self.driver = webdriver.Chrome(
             executable_path = self.chromeDriverPath,
@@ -75,6 +76,7 @@ if __name__ == '__main__':
         authTokenCookie = config["authTokenCookie"]
         chromeDriverPath = config["chromeDriverPath"]
         streamers = config["streamers"]
+        hideTheBot = config["hideTheBot"]
 
-    twitchPointFarmer = TwitchPointFarmer(authTokenCookie, chromeDriverPath, streamers)
+    twitchPointFarmer = TwitchPointFarmer(authTokenCookie, chromeDriverPath, streamers, hideTheBot)
     twitchPointFarmer.main()

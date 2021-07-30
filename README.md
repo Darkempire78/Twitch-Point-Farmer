@@ -15,17 +15,14 @@ Automatically collects channel points for your favorite streamers.
 {
     "chromeDriverPath": "", // Set the path of the chromedriver
     "authTokenCookie": "", // Paste the content of your Twitch authentication cookie (auth-token)
-    "streamers": [] // Put a list of your streamers to farm in order of preference (ex: ["streamerName1", "streamerName2", ...])
+    "streamers": [], // Put a list of your streamers to farm in order of preference (ex: ["streamerName1", "streamerName2", ...])
+    "hideTheBot" true // true = hide the bot, false = see the bot working
 }
 ```
 
 * Rename it to `config.json`.
 
 Finally, launch the script.
-
-## See the bot
-
-You can see how the robot works by commenting [this line](https://github.com/Darkempire78/Twitch-Point-Farmer/blob/main/main.py#L19).
 
 ## Get your Twitch authentication cookie (auth-token).
 
