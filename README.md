@@ -9,14 +9,12 @@ Automatically collects channel points for your favorite streamers.
 * Install all dependencies : ``pip install -r requirements.txt``.
 * Download [Chromedriver](https://chromedriver.chromium.org/downloads).
 * Get your Twitch authentication cookie (auth-token).
-* Create an application on the [Twitch dashboard](https://dev.twitch.tv/console/apps/create).
 * Edit `config.example.json`:
 
 ```Javascript
 {
     "chromeDriverPath": "", // Set the path of the chromedriver
     "authTokenCookie": "", // Paste the content of your Twitch authentication cookie (auth-token)
-    "twitchClientID": "", // Set your Twitch Application ID (from the dashboard)
     "streamers": [] // Put a list of your streamers to farm in order of preference (ex: ["streamerName1", "streamerName2", ...])
 }
 ```

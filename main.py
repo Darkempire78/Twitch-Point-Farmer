@@ -3,23 +3,13 @@ from selenium.webdriver.chrome.options import Options
 
 import json
 import time
-import requests
 import datetime
 
 class TwitchPointFarmer():
-    def __init__(self, authTokenCookie, chromeDriverPath, twitchClientID, streamers):
+    def __init__(self, authTokenCookie, chromeDriverPath, streamers):
         self.chromeDriverPath = chromeDriverPath
-
         self.authTokenCookie = authTokenCookie
-        self.twitchClientID = twitchClientID
-        self.twitchAPIEndpoint = "https://api.twitch.tv/kraken"
-        self.twitchAPIHeaders = {
-            'Client-ID' : self.twitchClientID,
-            'Accept' : 'application/vnd.twitchtv.v5+json',
-        }
-
         self.driver = None
-
         self.streamers = streamers
         self.currentStreamer = None
 
@@ -69,34 +59,13 @@ class TwitchPointFarmer():
         self.currentStreamer = None
         return
 
-    def getUserID(self, user):
-        reqSession = requests.Session()
-        url = f"{self.twitchAPIEndpoint}/users?login={user}"
-
-        req = reqSession.get(url, headers=self.twitchAPIHeaders)
-        jsondata = req.json()
-        if jsondata:
-            if len(jsondata["users"]) > 0:
-                return jsondata["users"][0]["_id"]
-        return None
-
     def checkIfUserIsStreaming(self, user): #returns true if online, false if not
-        userID = self.getUserID(user)
-
-        if userID:
-            reqSession = requests.Session()
-            url = f"{self.twitchAPIEndpoint}/streams/{userID}"
-
-            try:
-                req = reqSession.get(url, headers=self.twitchAPIHeaders)
-                jsondata = req.json()
-                if 'stream' in jsondata:
-                    return jsondata['stream'] is not None
-            except Exception as e:
-                print('Error checking user: ', e)
-                return None
-        else:
-            print("invalid user")
+        self.driver.get(f"https://www.twitch.tv/{user}")
+        time.sleep(8)
+        try:
+            self.driver.find_element_by_class_name("animated-channel-viewers-count") # Number of viewers (is streaming)
+            return True
+        except:
             return False
 
 if __name__ == '__main__':
@@ -105,8 +74,7 @@ if __name__ == '__main__':
         config = json.load(f)
         authTokenCookie = config["authTokenCookie"]
         chromeDriverPath = config["chromeDriverPath"]
-        twitchClientID = config["twitchClientID"]
         streamers = config["streamers"]
 
-    twitchPointFarmer = TwitchPointFarmer(authTokenCookie, chromeDriverPath, twitchClientID, streamers)
+    twitchPointFarmer = TwitchPointFarmer(authTokenCookie, chromeDriverPath, streamers)
     twitchPointFarmer.main()
