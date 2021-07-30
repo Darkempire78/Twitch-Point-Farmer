@@ -6,12 +6,14 @@ import time
 import datetime
 
 class TwitchPointFarmer():
-    def __init__(self, authTokenCookie, chromeDriverPath, streamers, hideTheBot):
+    def __init__(self, authTokenCookie, chromeDriverPath, streamers, hideTheBot, logs):
         self.chromeDriverPath = chromeDriverPath
         self.authTokenCookie = authTokenCookie
         self.driver = None
         self.streamers = streamers
         self.currentStreamer = None
+        self.hideTheBot = hideTheBot
+        self.logs = logs
 
     def main(self):
         # Open chromedriver
@@ -39,6 +41,7 @@ class TwitchPointFarmer():
             # Click on the reward
             try:
                 self.driver.find_element_by_css_selector("button[class='sc-fzozJi sc-fznKkj jwRWhW']").click()
+                self.log("Drop collected")
             except:
                 pass
             time.sleep(8)
@@ -47,13 +50,12 @@ class TwitchPointFarmer():
         for i in self.streamers:
             if self.checkIfUserIsStreaming(i):
                 self.currentStreamer = i
-                # Change the url
-                self.driver.get(f"https://www.twitch.tv/{self.currentStreamer}")
-                print(f"- [{datetime.datetime.now().strftime('%X')}] New Streamer : {self.currentStreamer}")
+                self.log(f"Is farming {self.currentStreamer}")
                 time.sleep(8)
                 try:
                     # If the live is under 18 yo
                     self.driver.find_element_by_css_selector("button[data-a-target='player-overlay-mature-accept']").click()
+                    self.log("+18 overlay skipped")
                 except:
                     pass
                 return
@@ -62,12 +64,19 @@ class TwitchPointFarmer():
 
     def checkIfUserIsStreaming(self, user): #returns true if online, false if not
         self.driver.get(f"https://www.twitch.tv/{user}")
-        time.sleep(8)
+        self.log(f"Checking if {user} is streaming")
+        time.sleep(10)
         try:
-            self.driver.find_element_by_class_name("animated-channel-viewers-count") # Number of viewers (is streaming)
+            self.driver.find_element_by_css_selector("p[data-a-target='animated-channel-viewers-count']") # Number of viewers (is streaming)
+            self.log(f"{user} is streaming")
             return True
         except:
+            self.log(f"{user} is not streaming")
             return False
+
+    def log(self, content):
+        if self.logs:
+            print(f"[{datetime.datetime.now().strftime('%X')}] {content}")
 
 if __name__ == '__main__':
     # Read config
@@ -77,6 +86,7 @@ if __name__ == '__main__':
         chromeDriverPath = config["chromeDriverPath"]
         streamers = config["streamers"]
         hideTheBot = config["hideTheBot"]
+        logs = config["logs"]
 
-    twitchPointFarmer = TwitchPointFarmer(authTokenCookie, chromeDriverPath, streamers, hideTheBot)
+    twitchPointFarmer = TwitchPointFarmer(authTokenCookie, chromeDriverPath, streamers, hideTheBot, logs)
     twitchPointFarmer.main()

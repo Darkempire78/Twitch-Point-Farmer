@@ -16,7 +16,8 @@ Automatically collects channel points for your favorite streamers.
     "chromeDriverPath": "", // Set the path of the chromedriver
     "authTokenCookie": "", // Paste the content of your Twitch authentication cookie (auth-token)
     "streamers": [], // Put a list of your streamers to farm in order of preference (ex: ["streamerName1", "streamerName2", ...])
-    "hideTheBot" true // true = hide the bot, false = see the bot working
+    "hideTheBot" true, // true = hide the bot, false = see the bot working
+    "logs": true // true = log every bot's actions, false = do not log bot's actions
 }
 ```
 
