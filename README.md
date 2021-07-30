@@ -23,6 +23,10 @@ Automatically collects channel points for your favorite streamers.
 
 Finally, launch the script.
 
+## See the bot
+
+You can see how the robot works by commenting [this line](https://github.com/Darkempire78/Twitch-Point-Farmer/blob/main/main.py#L19).
+
 ## Get your Twitch authentication cookie (auth-token).
 
 * Go to `settings` (`advanced settings` for some browsers)
